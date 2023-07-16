@@ -1,27 +1,30 @@
 import java.util.Arrays;
 
 /*
- * @lc app=leetcode.cn id=392 lang=java
+ * @lc app=leetcode.cn id=115 lang=java
  * @lcpr version=21909
  *
- * [392] 判断子序列
+ * [115] 不同的子序列
  */
 
 // @lc code=start
 class Solution {
-    public boolean isSubsequence(String s, String t) {
+    public int numDistinct(String s, String t) {
         int[][] dp = new int[s.length() + 1][t.length() + 1];
+        for(int i = 0; i <= s.length(); i++) {
+            dp[i][0] = 1;
+        }
         for(int i = 1; i <= s.length(); i++) {
             for(int j = 1; j <= t.length(); j++) {
                 if(s.charAt(i - 1) == t.charAt(j - 1)) {
-                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                    dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
                 }
                 else {
-                    dp[i][j] = dp[i][j - 1];
+                    dp[i][j] = dp[i - 1][j];
                 }
             }
         }
-        return dp[s.length()][t.length()] == s.length();
+        return dp[s.length()][t.length()];
     }
 }
 // @lc code=end
@@ -30,11 +33,11 @@ class Solution {
 
 /*
 // @lcpr case=start
-// "abc"\n"ahbgdc"\n
+// "rabbbit"\n"rabbit"\n
 // @lcpr case=end
 
 // @lcpr case=start
-// "axc"\n"ahbgdc"\n
+// "babgbag"\n"bag"\n
 // @lcpr case=end
 
  */
