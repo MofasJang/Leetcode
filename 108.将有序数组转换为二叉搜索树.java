@@ -1,7 +1,5 @@
 import java.util.Arrays;
 
-import javax.swing.tree.TreeNode;
-
 /*
  * @lc app=leetcode.cn id=108 lang=java
  * @lcpr version=21909
